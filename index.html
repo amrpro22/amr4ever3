@@ -1,311 +1,388 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>صندوق مساعدة الحالات الطارئة</title>
-    
-    <!-- تحميل خط تجوال من Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
-    
-    <!-- تحميل Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- تخصيص إعدادات Tailwind لتشمل الخط المخصص وألوان محددة -->
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['Tajawal', 'sans-serif'],
-                    },
-                    colors: {
-                        primary: '#001f54',
-                        secondary: '#003b8e',
-                        accent: '#d4a84f',
-                        gold: '#c89b3c'
-                    }
-                }
-            }
-        }
-    </script>
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>كشف مساعدة - عمر أحمد ناجي الشجاع</title>
     <style>
-        body {
-            font-family: 'Tajawal', sans-serif;
-            background-color: #f0f4f8;
-            background-image: radial-gradient(#cbd5e1 1px, transparent 1px);
-            background-size: 20px 20px;
-        }
-        
-        .fade-in {
-            animation: fadeIn 0.4s ease-in-out;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
+        /* استحضار نمط خطوط أبل برو */
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@300;400;600;700&display=swap');
+
+        :root {
+            --primary-dark: #1d1d1f; 
+            --primary: #1b5e4a;
+            --primary-light: #2d8a6e;
+            --accent: #f5c542;
+            --bg-page: #f5f5f7;
+            --text-main: #1d1d1f;
+            --text-secondary: #86868b;
+            --border: #d2d2d7;
+            --unpaid-red: #d70015; 
+            --card-bg: #ffffff;
+            --info-blue: #0071e3;
         }
 
-        /* تخصيص شريط التمرير */
-        ::-webkit-scrollbar {
-            width: 8px;
+        * { 
+            margin: 0; 
+            padding: 0; 
+            box-sizing: border-box; 
         }
-        ::-webkit-scrollbar-track {
-            background: #f1f1f1; 
+
+        body {
+            background-color: var(--bg-page);
+            font-family: 'SF Pro Display', 'SF Pro Text', 'Noto Sans Arabic', -apple-system, BlinkMacSystemFont, sans-serif;
+            color: var(--text-main);
+            padding: 20px;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
         }
-        ::-webkit-scrollbar-thumb {
-            background: #cbd5e1; 
-            border-radius: 10px;
+
+        .container {
+            max-width: 850px;
+            margin: 0 auto;
+            background: #fff;
+            border-radius: 24px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.06);
+            overflow: hidden;
         }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #94a3b8; 
+
+        /* الهيدر العلوي الملون */
+        .header {
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
+            padding: 50px 30px 40px;
+            text-align: center;
+            color: #ffffff;
+            border-bottom: 4px solid var(--accent);
+        }
+
+        .header h1 { 
+            font-size: 1.7rem; 
+            font-weight: 700;
+            letter-spacing: -0.01em;
+            margin-bottom: 5px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .header p {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            font-weight: 300;
+        }
+
+        /* رسالة الشكر بتصميم مميز */
+        .thank-you-section {
+            margin: 30px 25px 30px;
+            padding: 30px;
+            background: linear-gradient(145deg, #f0f9f6 0%, #ffffff 100%);
+            border-radius: 20px;
+            border: 1px solid #e2efea;
+            box-shadow: inset 0 0 15px rgba(27, 94, 74, 0.03);
+        }
+
+        .thank-you-msg {
+            font-size: 0.95rem;
+            color: #3a3a3c;
+            text-align: justify;
+        }
+
+        .thank-you-msg p {
+            margin-bottom: 15px;
+        }
+
+        /* بطاقات التفاصيل الجذابة */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin: 25px 0;
+        }
+
+        .stat-card {
+            padding: 20px;
+            border-radius: 16px;
+            text-align: center;
+            transition: transform 0.2s;
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-3px);
+        }
+
+        .card-spent {
+            background: #fdf8e6;
+            border-bottom: 4px solid var(--accent);
+        }
+
+        .card-surplus {
+            background: #eef7ff;
+            border-bottom: 4px solid var(--info-blue);
+        }
+
+        .stat-label {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+        }
+
+        .stat-value {
+            display: block;
+            font-size: 1.25rem;
+            font-weight: 700;
+            font-family: 'SF Pro Display', sans-serif;
+        }
+
+        .card-spent .stat-value { color: #856404; }
+        .card-surplus .stat-value { color: var(--info-blue); }
+
+        .table-header-title {
+            padding: 20px 30px 10px;
+            font-weight: 700;
+            color: var(--primary);
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .table-header-title::after {
+            content: "";
+            flex: 1;
+            height: 1px;
+            background: var(--border);
+        }
+
+        .table-wrapper {
+            padding: 10px 25px 25px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        thead th {
+            background: #fff;
+            color: var(--text-secondary);
+            padding: 12px 15px;
+            text-align: right;
+            font-size: 0.8rem;
+            font-weight: 600;
+            border-bottom: 1px solid var(--border);
+        }
+
+        td {
+            padding: 14px 15px;
+            border-bottom: 1px solid #f2f2f7;
+            font-size: 0.95rem;
+        }
+
+        .unpaid-row {
+            color: var(--unpaid-red) !important;
+            font-weight: 600;
+        }
+
+        .unpaid-row .amount-tag {
+            background: #fff1f0 !important;
+            color: var(--unpaid-red) !important;
+            border: 1px solid #ffa39e !important;
+        }
+
+        .id-cell { width: 40px; color: var(--text-secondary); font-size: 0.85rem; }
+        .name-cell { font-weight: 500; }
+        
+        .amount-tag {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 0.85rem;
+            background: #f5f5f7;
+            border: 1px solid var(--border);
+            direction: ltr;
+        }
+
+        .status-cell { text-align: center; }
+
+        .search-box {
+            padding: 0 30px 15px;
+        }
+
+        #search {
+            width: 100%;
+            padding: 12px 18px;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            background: #f5f5f7;
+            font-size: 0.9rem;
+            outline: none;
+            transition: all 0.2s;
+        }
+
+        #search:focus { background: #fff; border-color: var(--info-blue); box-shadow: 0 0 0 4px rgba(0,113,227,0.08); }
+
+        footer {
+            padding: 35px;
+            text-align: center;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            background: #fafafa;
+            border-top: 1px solid var(--border);
+        }
+
+        @media (max-width: 600px) {
+            .stats-grid { grid-template-columns: 1fr; }
+            .thank-you-section { padding: 20px; }
+            .header h1 { font-size: 1.4rem; }
+        }
+
+        @media print {
+            .search-box, .stat-card:hover { display: none; }
+            .container { box-shadow: none; border: none; }
+            .thank-you-section { background: #f9f9f9 !important; border: 1px solid #ddd; }
+            .header { background: #1b5e4a !important; color: white !important; -webkit-print-color-adjust: exact; }
         }
     </style>
 </head>
+<body>
 
-<body class="min-h-screen flex justify-center items-center p-4 sm:p-6 md:p-10">
-
-    <div class="w-full max-w-4xl bg-white rounded-3xl shadow-2xl overflow-hidden border border-gray-100 flex flex-col">
-        
-        <!-- الهيدر -->
-        <header class="bg-gradient-to-r from-primary to-secondary text-white relative overflow-hidden py-12 px-6 text-center shadow-md border-b-4 border-gold">
-            <!-- زخرفة خلفية -->
-            <div class="absolute -top-10 -right-10 w-32 h-32 bg-white opacity-5 rounded-full blur-2xl"></div>
-            <div class="absolute -bottom-10 -left-10 w-40 h-40 bg-accent opacity-10 rounded-full blur-2xl"></div>
-            
-            <div class="relative z-10 flex flex-col items-center justify-center gap-3">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-14 w-14 text-accent mb-2 drop-shadow-md" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-                </svg>
-                <h1 class="text-3xl md:text-4xl font-extrabold tracking-tight drop-shadow-lg">صندوق مساعدة الحالات الطارئة</h1>
-                <p class="text-accent text-lg md:text-xl font-medium mt-2 drop-shadow">معاً نخفف الألم ونرسم الأمل</p>
-            </div>
-        </header>
-
-        <!-- المحتوى -->
-        <main class="flex-grow p-6 md:p-10">
-            
-            <!-- قسم البحث -->
-            <div class="mb-8 bg-gray-50 p-6 rounded-2xl border border-gray-100 shadow-inner">
-                <label for="searchInput" class="block mb-3 text-lg md:text-xl font-bold text-primary">البحث باسم المتبرع</label>
-                <div class="flex flex-col md:flex-row gap-4">
-                    <div class="relative flex-grow">
-                        <div class="absolute inset-y-0 right-0 pr-4 flex items-center pointer-events-none">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                            </svg>
-                        </div>
-                        <input 
-                            type="text" 
-                            id="searchInput" 
-                            class="w-full pl-4 pr-12 py-4 rounded-xl border-2 border-gray-200 focus:border-accent focus:ring-4 focus:ring-accent/20 text-gray-700 text-lg transition-all outline-none shadow-sm"
-                            placeholder="اكتب اسم المتبرع هنا (مثل: الشجاع)..."
-                            onkeypress="handleKeyPress(event)"
-                        >
-                    </div>
-                    <button 
-                        onclick="searchDonor()" 
-                        class="bg-gradient-to-r from-primary to-secondary hover:from-secondary hover:to-blue-700 text-white font-bold text-lg py-4 px-10 rounded-xl shadow-lg transform hover:-translate-y-1 hover:shadow-xl transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-secondary/30 active:translate-y-0 flex justify-center items-center gap-2">
-                        <span>بحث</span>
-                    </button>
-                </div>
-            </div>
-
-            <!-- قسم النتائج -->
-            <div class="bg-white rounded-2xl border-2 border-dashed border-accent/60 p-6 md:p-8 min-h-[250px]">
-                <div class="flex items-center gap-3 mb-6">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
-                    </svg>
-                    <h3 class="text-2xl font-bold text-primary">نتائج البحث</h3>
-                </div>
-
-                <!-- حاوية النتائج الديناميكية -->
-                <div id="resultsContainer" class="text-center text-gray-500 py-10 flex flex-col items-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 text-gray-300 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 16l2.879-2.879m0 0a3 3 0 104.243-4.242 3 3 0 00-4.243 4.242zM21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                    <p class="text-lg">قم بكتابة اسم المتبرع في حقل البحث لإظهار البيانات.</p>
-                </div>
-            </div>
-
-        </main>
-
-        <!-- الفوتر -->
-        <footer class="bg-slate-50 border-t border-gray-200 p-6 text-center">
-            <p class="text-primary font-bold text-lg flex items-center justify-center gap-2">
-                اللهم اجعل ما قدموه في ميزان حسناتهم 
-                <span class="text-red-500 animate-pulse">🤍</span>
-            </p>
-        </footer>
-
+<div class="container">
+    <div class="header">
+        <h1>كشف مساعدة الأخ عمر أحمد ناجي الشجاع (رحمه الله)</h1>
+        <p>مبادرة الوفاء والعطاء للأهل والأصدقاء</p>
     </div>
 
-    <script>
-        // بيانات المتبرعين
-        const donors = [
-            { name: "مصطفى الشجاع", note: "تبرع بمبلغ 200 دولار ✅ يمني لمدة 6 أشهر." },
-            { name: "أحمد بن أحمد الشجاع", note: "تبرع بمبلغ 200 دولار." },
-            { name: "نضال أحمد الشجاع", note: "تبرع بمبلغ 100 دولار." },
-            { name: "مفيد الغزالي", note: "تبرع بمبلغ 100 دولار." },
-            { name: "بدر الشجاع وإخوانه", note: "تبرع بمبلغ 75 دولار." },
-            { name: "محمد علي ناجي الشجاع", note: "تبرع بمبلغ 50 دولار ✅ مدفوع 6 أشهر." },
-            { name: "معاد الشجاع", note: "تبرع بمبلغ 50 دولار ✅ مدفوع 6 أشهر." },
-            { name: "رافع الشجاع", note: "تبرع بمبلغ 50 دولار ✅ مدفوع 6 أشهر." },
-            { name: "أشرف الشجاع", note: "تبرع بمبلغ 50 دولار ✅ مدفوع 6 أشهر." },
-            { name: "فاعلة خير", note: "تبرعت بمبلغ 50 دولار ✅ مدفوع 6 أشهر." },
-            { name: "نبيل الشجاع", note: "تبرع بمبلغ 50 دولار." },
-            { name: "علي عبده مسعد", note: "تبرع بمبلغ 50 دولار." },
-            { name: "تمام علي الشجاع", note: "تبرع بمبلغ 50 دولار." },
-            { name: "زكريا حزام الشجاع", note: "تبرع بمبلغ 50 دولار." },
-            { name: "عبد الملك نبيل الشجاع", note: "تبرع بمبلغ 50 دولار." },
-            { name: "عزيز محمد عبد الله", note: "تبرع بمبلغ 25 دولار." },
-            { name: "عمار مطهر الشجاع", note: "تبرع بمبلغ 25 دولار." },
-            { name: "همدان أحمد الشجاع", note: "تبرع بمبلغ 25 دولار." },
-            { name: "مجيد علي ناجي الشجاع", note: "تبرع بمبلغ 25 دولار." },
-            { name: "عبد الوهاب أحمد الشجاع", note: "تبرع بمبلغ 25 دولار." },
-            { name: "الأمير مصطفى الشجاع", note: "تبرع بمبلغ 20 دولار ✅ مدفوع 6 أشهر." },
-            { name: "الأميرة مصطفى الشجاع", note: "تبرعت بمبلغ 20 دولار ✅ مدفوع 6 أشهر." },
-            { name: "السلطانة مصطفى الشجاع", note: "تبرعت بمبلغ 20 دولار ✅ مدفوع 6 أشهر." },
-            { name: "المصطفى مصطفى الشجاع", note: "تبرع بمبلغ 20 دولار ✅ مدفوع 6 أشهر." },
-            { name: "الخليفة مصطفى الشجاع", note: "تبرع بمبلغ 20 دولار ✅ مدفوع 6 أشهر." },
-            { name: "سامي خالد الشجاع", note: "تبرع بمبلغ 200 دولار سنوياً." },
-            { name: "محمد ناجي الشجاع", note: "تبرع بمبلغ 100 ريال سعودي ✅ مدفوع 6 أشهر." },
-            { name: "نايف الشجاع", note: "تبرع بمبلغ 50 ريال سعودي." },
-            { name: "ماجد الشجاع", note: "تبرع بمبلغ 50 ريال سعودي." },
-            { name: "عبدالعزيز عزيز الشجاع", note: "تبرع بمبلغ 50 ألف سنوياً." },
-            { name: "معمر علي بن علي", note: "تبرع بمبلغ 50 ريال سعودي." },
-            { name: "محمد السمه", note: "تبرع بمبلغ 50 ريال سعودي." },
-            { name: "طاهر خشخش", note: "تبرع بمبلغ 50 ريال سعودي." },
-            { name: "علي خشخش", note: "تبرع بمبلغ 50 ريال سعودي." },
-            { name: "غانم خشخش", note: "تبرع بمبلغ 50 ريال سعودي." },
-            { name: "محمد أحمد مسعد الشجاع", note: "تبرع بمبلغ 50 ريال سعودي." },
-            { name: "عمرو مسعد الشجاع", note: "تبرع بمبلغ 50 ريال سعودي." },
-            { name: "أحمد صالح خشخش", note: "تبرع بمبلغ 50 ريال سعودي." },
-            { name: "عمار محمد أحمد الشجاع", note: "تبرع بمبلغ 50 ريال سعودي." },
-            { name: "هارون محمد أحمد الشجاع", note: "تبرع بمبلغ 50 ريال سعودي إلى روح عمه عمر." },
-            { name: "نجم الدين علي الشجاع", note: "تبرع بمبلغ 50 ريال سعودي." },
-            { name: "عزيز ناجي الشجاع", note: "تبرع بمبلغ 25 ريال سعودي." },
-            { name: "عدنان صالح الشجاع", note: "تبرع بمبلغ 25 ريال سعودي." },
-            { name: "عبد ناجي الشجاع", note: "تبرع بمبلغ 25 ريال سعودي." },
-            { name: "فاعل خير عن أمه من طرف محمد ناجي", note: "تبرع بمبلغ 25 ريال سعودي، رحمها الله." },
-            { name: "محمد عبد ناجي الشجاع", note: "تبرع بمبلغ 25 ريال سعودي." },
-            { name: "إلى روح عمر أحمد خشخش", note: "تبرع بمبلغ 300 ريال سعودي سنوياً ✅ مدفوع 6 أشهر." },
-            { name: "محمد ناجي الشجاع - روح والدته مسعدة", note: "تبرع بمبلغ 300 ريال سعودي سنوياً ✅ مدفوع 6 أشهر." },
-            { name: "معاذ محمد عبد الشجاع", note: "تبرع بمبلغ 300 ريال سعودي سنوياً." },
-            { name: "شايف محمد عبده الشجاع", note: "تبرع بمبلغ 50 ريال سعودي شهرياً." },
-            { name: "عبد المجيد ناجي الشجاع", note: "تبرع بمبلغ 300 ريال سعودي سنوياً." },
-            { name: "خالد علي خشخش", note: "تبرع بمبلغ 500 ريال سعودي سنوياً." },
-            { name: "الدكتور محمد الشجاع", note: "تبرع بمبلغ 120 ألف يمني سنوياً ✅ مدفوع 115 دولار لمدة 6 أشهر." },
-            { name: "مهيوب محمد عبدالله الشجاع", note: "تبرع بمبلغ 120 ألف يمني سنوياً." },
-            { name: "خالد الشجاع", note: "تبرع بمبلغ 60 ألف يمني سنوياً." },
-            { name: "فيصل الشجاع", note: "تبرع بمبلغ 60 ألف يمني سنوياً." },
-            { name: "ياسر الشجاع", note: "تبرع بمبلغ 50 ألف يمني سنوياً." },
-            { name: "يوسف مهيوب", note: "تبرع بمبلغ 50 ألف يمني سنوياً." },
-            { name: "ناصر محمد صالح الشجاع", note: "تبرع بمبلغ 50 ألف يمني سنوياً." },
-            { name: "عبد الرحمن علي الشجاع", note: "تبرع بمبلغ 40 ألف يمني سنوياً." },
-            { name: "فايز أحمد العمامي", note: "تبرع بمبلغ 36 ألف يمني سنوياً." },
-            { name: "حميد عبد علي صالح", note: "تبرع بمبلغ 36 ألف يمني سنوياً." },
-            { name: "نعمان أحمد الغزالي", note: "تبرع بمبلغ 36 ألف يمني سنوياً." },
-            { name: "محمد عبد الغزالي", note: "تبرع بمبلغ 36 ألف يمني سنوياً." },
-            { name: "عز الدين عبد الغزالي", note: "تبرع بمبلغ 36 ألف يمني سنوياً." },
-            { name: "عارف عبدالله الحجواني", note: "تبرع بمبلغ 36 ألف يمني سنوياً." },
-            { name: "صديق صالح إسماعيل", note: "تبرع بمبلغ 36 ألف يمني سنوياً." },
-            { name: "عبد السلام الشجاع", note: "تبرع بمبلغ 36 ألف يمني سنوياً." },
-            { name: "أسعد علي ناجي الشجاع", note: "تبرع بمبلغ 10 آلاف يمني سنوياً." },
-            { name: "موسى علي الشجاع", note: "تبرع بمبلغ 5000 ريال يمني شهرياً." },
-            { name: "عبد اللطيف أحمد الشجاع", note: "تبرع بمبلغ 50 ألف يمني سنوياً." },
-            { name: "لطف عبد أحمد الشجاع", note: "تبرع بمبلغ 50 ألف يمني سنوياً." },
-            { name: "محمد حزام العمامي", note: "تبرع بمبلغ 50 ألف يمني سنوياً." },
-            { name: "علي محمد أحمد محسن", note: "تبرع بمبلغ 36 ألف يمني سنوياً." }
-        ];
-
-        
-        // دالة للتعامل مع الضغط على زر الإدخال (Enter)
-        function handleKeyPress(event) {
-            if (event.key === 'Enter') {
-                searchDonor();
-            }
-        }
-
-        // دالة البحث والفلترة
-        function searchDonor() {
-            const input = document.getElementById("searchInput").value.trim();
-            const container = document.getElementById("resultsContainer");
+    <div class="thank-you-section">
+        <div class="thank-you-msg">
+            <p><strong>السلام عليكم ورحمة الله وبركاته،</strong></p>
+            <p>بخصوص حالة الأخ عمر أحمد ناجي الشجاع رحمه الله وغفر له، نتقدم بجزيل الشكر والتقدير لكل من ساهم ووقف وساند في علاجه ومساعدة أسرته، ونسأل الله أن يجعل ما قدمتموه في ميزان حسناتكم.</p>
             
-            // تفريغ الحاوية وتجهيزها
-            container.innerHTML = '';
-            container.classList.remove("text-center", "py-10", "items-center", "flex-col");
-            container.classList.add("flex", "flex-col", "gap-4");
+            <p>ووفقًا لتقرير الدكتور <strong>محمد الشجاع</strong>، فقد تم صرف جميع المبالغ التي جُمعت لتغطية تكاليف العلاج، والمستشفى، ومصاريف الدفن.</p>
 
-            // حالة الحقل الفارغ
-            if (input === "") {
-                container.classList.add("text-center", "py-10", "items-center", "flex-col");
-                container.classList.remove("gap-4");
-                container.innerHTML = `
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 text-yellow-500 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
-                    </svg>
-                    <p class="text-lg font-semibold text-gray-700">يرجى كتابة اسم للبحث عنه.</p>
-                `;
-                return;
-            }
+            <div class="stats-grid">
+                <div class="stat-card card-spent">
+                    <span class="stat-label">إجمالي ما تم صرفه</span>
+                    <span class="stat-value">3,696,400 ر.ي</span>
+                    <small style="color:#856404; font-size: 0.7rem;">ثلاثة ملايين وستمائة وستة وتسعون ألفاً</small>
+                </div>
+                <div class="stat-card card-surplus">
+                    <span class="stat-label">المبلغ الفائض للصندوق</span>
+                    <span class="stat-value">666,655 ر.ي</span>
+                    <small style="color:var(--info-blue); font-size: 0.7rem;">سيحول لصندوق الحالات الطارئة</small>
+                </div>
+            </div>
 
-            // استخدام filter للبحث عن جميع النتائج المطابقة بدلاً من أول نتيجة فقط
-            const matchingDonors = donors.filter(d => d.name.includes(input));
+            <p>المبالغ المتبقية التي لم تُسدد بعد، ستُضاف إلى الصندوق عند استلامها بإذن الله. نسأل الله أن يتغمد الفقيد بواسع رحمته، وأن يجزيكم خير الجزاء.</p>
+        </div>
+    </div>
 
-            if (matchingDonors.length > 0) {
-                // إضافة رسالة توضح عدد النتائج
-                const countMsg = document.createElement("p");
-                countMsg.className = "text-sm text-gray-500 mb-2 fade-in";
-                countMsg.innerText = `تم العثور على (${matchingDonors.length}) نتيجة مطابقة:`;
-                container.appendChild(countMsg);
+    <div class="table-header-title">📋 قائمة المساهمين</div>
 
-                // بناء بطاقة لكل نتيجة
-                matchingDonors.forEach((donor, index) => {
-                    // تحديد إذا كان المتبرع قد دفع بناءً على وجود علامة ✅ في الملاحظة
-                    const isPaid = donor.note.includes('✅');
-                    const noteColor = isPaid ? 'bg-green-50 border-green-500 text-green-800' : 'bg-amber-50 border-accent text-amber-900';
-                    const iconColor = isPaid ? 'text-green-500' : 'text-accent';
+    <div class="search-box">
+        <input type="text" id="search" placeholder="ابحث عن اسم من القائمة..." onkeyup="doSearch()">
+    </div>
 
-                    const card = document.createElement("div");
-                    card.className = `fade-in bg-white p-5 rounded-xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow relative overflow-hidden`;
-                    // تأخير خفيف لكل بطاقة لتعطي تأثير ظهور متسلسل
-                    card.style.animationDelay = `${index * 0.05}s`;
+    <div class="table-wrapper">
+        <table id="targetTable">
+            <thead>
+                <tr>
+                    <th class="id-cell">#</th>
+                    <th>الاسم</th>
+                    <th>المبلغ</th>
+                    <th class="status-cell">الحالة</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- دولار -->
+                <tr><td class="id-cell">1</td><td class="name-cell">ابو علي</td><td><span class="amount-tag">$ 150</span></td><td class="status-cell">✅</td></tr>
+                <tr><td class="id-cell">2</td><td class="name-cell">مفيد الغزالي</td><td><span class="amount-tag">$ 100</span></td><td class="status-cell">✅</td></tr>
+                <tr><td class="id-cell">3</td><td class="name-cell">علي النقيب</td><td><span class="amount-tag">$ 250</span></td><td class="status-cell">✅</td></tr>
+                <tr><td class="id-cell">4</td><td class="name-cell">عمر مسعد الشجاع</td><td><span class="amount-tag">$ 50</span></td><td class="status-cell">✅</td></tr>
+                <tr class="unpaid-row"><td class="id-cell">5</td><td class="name-cell">عبدالرحمن احمد خشخش</td><td><span class="amount-tag">$ 200</span></td><td class="status-cell">❌</td></tr>
+                
+                <tr><td class="id-cell">6</td><td class="name-cell">نبيل الشجاع</td><td><span class="amount-tag">$ 100</span></td><td class="status-cell">✅</td></tr>
+                <tr><td class="id-cell">7</td><td class="name-cell">عبدالناصر الجحدري</td><td><span class="amount-tag">$ 100</span></td><td class="status-cell">✅</td></tr>
+                <tr><td class="id-cell">8</td><td class="name-cell">ابو امير الشجاع</td><td><span class="amount-tag">$ 1000</span></td><td class="status-cell">✅</td></tr>
+                <tr><td class="id-cell">9</td><td class="name-cell">مجيد الشجاع</td><td><span class="amount-tag">$ 500</span></td><td class="status-cell">✅</td></tr>
+                <tr><td class="id-cell">10</td><td class="name-cell">معاذ الشجاع</td><td><span class="amount-tag">$ 500</span></td><td class="status-cell">✅</td></tr>
+                <tr><td class="id-cell">11</td><td class="name-cell">اشرف الشجاع</td><td><span class="amount-tag">$ 500</span></td><td class="status-cell">✅</td></tr>
+                <tr><td class="id-cell">12</td><td class="name-cell">رافع الشجاع</td><td><span class="amount-tag">$ 250</span></td><td class="status-cell">✅</td></tr>
+                <tr><td class="id-cell">13</td><td class="name-cell">فاعله خير</td><td><span class="amount-tag">$ 50</span></td><td class="status-cell">✅</td></tr>
+                <tr><td class="id-cell">14</td><td class="name-cell">فاعلة خير</td><td><span class="amount-tag">$ 100</span></td><td class="status-cell">✅</td></tr>
+                <tr><td class="id-cell">15</td><td class="name-cell">فاعلة خير</td><td><span class="amount-tag">$ 100</span></td><td class="status-cell">✅</td></tr>
+                <tr><td class="id-cell">16</td><td class="name-cell">حمزة الشجاع</td><td><span class="amount-tag">$ 150</span></td><td class="status-cell">✅</td></tr>
+                <tr><td class="id-cell">17</td><td class="name-cell">محمد احمد علي الشجاع</td><td><span class="amount-tag">$ 100</span></td><td class="status-cell">✅</td></tr>
+                <tr><td class="id-cell">18</td><td class="name-cell">علي مسعد الشجاع</td><td><span class="amount-tag">$ 500</span></td><td class="status-cell">✅</td></tr>
+                <tr><td class="id-cell">19</td><td class="name-cell">اولاد علي عبده الشجاع</td><td><span class="amount-tag">$ 500</span></td><td class="status-cell">✅</td></tr>
+                <tr><td class="id-cell">20</td><td class="name-cell">فاعل خير</td><td><span class="amount-tag">$ 300</span></td><td class="status-cell">✅</td></tr>
+                <tr><td class="id-cell">21</td><td class="name-cell">رزق الله الجحدري</td><td><span class="amount-tag">$ 200</span></td><td class="status-cell">✅</td></tr>
+                <tr><td class="id-cell">22</td><td class="name-cell">همدان الشجاع</td><td><span class="amount-tag">$ 100</span></td><td class="status-cell">✅</td></tr>
+                <tr><td class="id-cell">23</td><td class="name-cell">عبد الفتاح الشجاع</td><td><span class="amount-tag">$ 100</span></td><td class="status-cell">✅</td></tr>
+                
+                <!-- س -->
+                <tr><td class="id-cell">24</td><td class="name-cell">صديق صالح الشجاع</td><td><span class="amount-tag">200 س</span></td><td class="status-cell">✅</td></tr>
+                <tr><td class="id-cell">25</td><td class="name-cell">عمار الشجاع</td><td><span class="amount-tag">200 س</span></td><td class="status-cell">✅</td></tr>
+                <tr><td class="id-cell">26</td><td class="name-cell">عبدالرحمن احمد ناجي الشجاع</td><td><span class="amount-tag">500 س</span></td><td class="status-cell">✅</td></tr>
+                <tr><td class="id-cell">27</td><td class="name-cell">عبدالمجيد ناجي الشجاع</td><td><span class="amount-tag">200 س</span></td><td class="status-cell">✅</td></tr>
+                <tr><td class="id-cell">28</td><td class="name-cell">د محمد الشجاع</td><td><span class="amount-tag">200 س</span></td><td class="status-cell">✅</td></tr>
+                <tr><td class="id-cell">29</td><td class="name-cell">معمر خشخش</td><td><span class="amount-tag">300 س</span></td><td class="status-cell">✅</td></tr>
+                <tr class="unpaid-row"><td class="id-cell">30</td><td class="name-cell">غانم خشخش</td><td><span class="amount-tag">300 س</span></td><td class="status-cell">❌</td></tr>
+                
+                <tr><td class="id-cell">31</td><td class="name-cell">عز الدين الغزالي</td><td><span class="amount-tag">300 س</span></td><td class="status-cell">✅</td></tr>
+                <tr><td class="id-cell">32</td><td class="name-cell">محمد السمه</td><td><span class="amount-tag">200 س</span></td><td class="status-cell">✅</td></tr>
+                <tr><td class="id-cell">33</td><td class="name-cell">علي صالح الغرباني</td><td><span class="amount-tag">300 س</span></td><td class="status-cell">✅</td></tr>
+                <tr><td class="id-cell">34</td><td class="name-cell">هارون محمد الشجاع</td><td><span class="amount-tag">1500 س</span></td><td class="status-cell">✅</td></tr>
+                <tr><td class="id-cell">35</td><td class="name-cell">عبدالعزيز عزيز</td><td><span class="amount-tag">100 س</span></td><td class="status-cell">✅</td></tr>
+                <tr><td class="id-cell">36</td><td class="name-cell">نجم الدين الشجاع</td><td><span class="amount-tag">100 س</span></td><td class="status-cell">✅</td></tr>
+                <tr><td class="id-cell">37</td><td class="name-cell">ياسر الشجاع</td><td><span class="amount-tag">200 س</span></td><td class="status-cell">✅</td></tr>
+                <tr><td class="id-cell">38</td><td class="name-cell">خليل السمه</td><td><span class="amount-tag">100 س</span></td><td class="status-cell">✅</td></tr>
+                <tr><td class="id-cell">39</td><td class="name-cell">اولاد ناجي محمد صالح الشجاع</td><td><span class="amount-tag">500 س</span></td><td class="status-cell">✅</td></tr>
+                <tr><td class="id-cell">40</td><td class="name-cell">طلال عبده احمد</td><td><span class="amount-tag">500 س</span></td><td class="status-cell">✅</td></tr>
+                <tr><td class="id-cell">41</td><td class="name-cell">محمد حزام العمامي</td><td><span class="amount-tag">200 س</span></td><td class="status-cell">✅</td></tr>
+                <tr class="unpaid-row"><td class="id-cell">42</td><td class="name-cell">يوسف خشخش</td><td><span class="amount-tag">200 س</span></td><td class="status-cell">❌</td></tr>
+                
+                <tr><td class="id-cell">43</td><td class="name-cell">طه عيسى الجحدري</td><td><span class="amount-tag">200 س</span></td><td class="status-cell">✅</td></tr>
+                <tr><td class="id-cell">44</td><td class="name-cell">نايف الشجاع</td><td><span class="amount-tag">200 س</span></td><td class="status-cell">✅</td></tr>
+                <tr><td class="id-cell">45</td><td class="name-cell">بلال صالح علي</td><td><span class="amount-tag">300 س</span></td><td class="status-cell">✅</td></tr>
+                
+                <!-- ريال -->
+                <tr><td class="id-cell">46</td><td class="name-cell">أبو نظال الشجاع</td><td><span class="amount-tag">150,000 ريال</span></td><td class="status-cell">✅</td></tr>
+                <tr><td class="id-cell">47</td><td class="name-cell">عبده مسعد الشجاع</td><td><span class="amount-tag">259,500 ريال</span></td><td class="status-cell">✅</td></tr>
+                <tr><td class="id-cell">48</td><td class="name-cell">وليد الشجاع</td><td><span class="amount-tag">10,000 ريال</span></td><td class="status-cell">✅</td></tr>
+                <tr><td class="id-cell">49</td><td class="name-cell">فيصل محمد الشجاع</td><td><span class="amount-tag">20,000 ريال</span></td><td class="status-cell">✅</td></tr>
+                <tr><td class="id-cell">50</td><td class="name-cell">ماجد احمد محمد الشجاع</td><td><span class="amount-tag">100,000 ريال</span></td><td class="status-cell">✅</td></tr>
+                <tr><td class="id-cell">51</td><td class="name-cell">الحاج عبده علي خشخش</td><td><span class="amount-tag">50,000 ريال</span></td><td class="status-cell">✅</td></tr>
+                <tr><td class="id-cell">52</td><td class="name-cell">محمد العماري</td><td><span class="amount-tag">15,000 ريال</span></td><td class="status-cell">✅</td></tr>
+                <tr><td class="id-cell">53</td><td class="name-cell">اياد محمد عبده الشجاع</td><td><span class="amount-tag">10,000 ريال</span></td><td class="status-cell">✅</td></tr>
+            </tbody>
+        </table>
+    </div>
 
-                    card.innerHTML = `
-                        <div class="absolute top-0 right-0 w-2 h-full ${isPaid ? 'bg-green-500' : 'bg-accent'}"></div>
-                        <h4 class="text-xl font-bold text-primary mb-3 flex items-center gap-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 ${iconColor}" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                            </svg>
-                            ${donor.name}
-                        </h4>
-                        <div class="${noteColor} p-4 rounded-lg border-r-4 text-base font-medium flex items-start gap-3">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                            </svg>
-                            <p>${donor.note}</p>
-                        </div>
-                    `;
-                    container.appendChild(card);
-                });
-            } else {
-                // حالة عدم وجود نتائج
-                container.classList.add("text-center", "py-10", "items-center", "flex-col");
-                container.classList.remove("gap-4");
-                container.innerHTML = `
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 text-red-400 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                    <p class="text-xl font-bold text-primary mb-2">عذراً، لا توجد نتائج!</p>
-                    <p class="text-gray-500">لم نتمكن من العثور على متبرع باسم "${input}". تأكد من صحة الإملاء وحاول مجدداً.</p>
-                `;
+    <footer>
+        <p>رحم الله الفقيد وأسكنه فسيح جناته</p>
+        <p style="margin-top: 5px; font-weight: 600;">فريق إدارة الحالة - 2024</p>
+    </footer>
+</div>
+
+<script>
+    function doSearch() {
+        var input, filter, table, tr, td, i, txtValue;
+        input = document.getElementById("search");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("targetTable");
+        tr = table.getElementsByTagName("tr");
+        for (i = 1; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[1];
+            if (td) {
+                txtValue = td.textContent || td.innerText;
+                tr[i].style.display = txtValue.toUpperCase().indexOf(filter) > -1 ? "" : "none";
             }
         }
-    </script>
+    }
+</script>
+
 </body>
 </html>
+
